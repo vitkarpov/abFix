@@ -1,0 +1,111 @@
+<!DOCTYPE HTML>
+<!--[if lt IE 7]>      <html class="ie6"> <![endif]-->
+<!--[if IE 7]>         <html class="ie7"> <![endif]-->
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if gt IE 8]><!--> <html>         <!--<![endif]-->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>jQuery-плагин для эмуляции псевдоэлементов :before и :after</title>
+
+	<link rel="stylesheet" href="css/normalize.css">
+	<link rel="stylesheet" href="css/all.css">
+	<link rel="stylesheet" href="css/highlight.css">
+</head>
+<body>
+	<div id="wrapper">
+		<h1>jQuery-плагин для эмуляции псевдоэлементов <code>:before</code> и <code>:after</code></h1>
+		
+		<p>Уверен, что каждый разработчик из проекта в проект делает один и тот же хак — эмуляция псевдоэлементов <code>:before</code> и <code>:after</code> для IE. Генерируемый контент очень удобен и, лично мне, не хочется ради IE7 класть пустые элементы, например, для иконок.<br />Наверное, это самый маленький плагин в мире и очень полезный.</p>
+		
+		<h2>Сначала пример!</h2>
+		<p>Почти нечего показывать — вот моя почта: <a href="mailto:viktor.s.karpov@gmail.com" class="email-ico before-fix">viktor.s.karpov@gmail.com</a></p>
+		<p>Если у вас нормальный браузер, то иконка — псевдоэлемент, а если ИЕ7, то DOM-элемент. (Если вы не видите иконку или не понимаете о чем речь, то вообще полная жесть).</p>
+
+		<h2>Как это работает?</h2>
+		
+		<p class="callout">Псевдоэлементы, о которых идет речь, <a href="http://caniuse.com/#feat=css-gencontent">поддерживаются</a> начиная&nbsp;с&nbsp;8 версии ИЕ.</p>
+		
+		<p>Очень просто. Пишем стили, используя псевдоэлементы <code>:before</code> или <code>:after</code>, так:</p>
+		<div class="cl"></div>
+
+		<pre class="callout-after js-highlight" data-type="css">
+.pic {
+	position: relative;
+	display: inline-block;
+	padding-left: 20px;
+}
+	.pic:before,
+	.pic > .ie-prepend {
+		content: '';					
+		width: 16px; height: 16px;
+		background: url(/path/to/sprite.css) 0 0 no-repeat;
+		position: absolute;
+		left: 0; top: 50%;
+		margin-top: -8px;
+	}
+
+	.ie7 .pic {
+		display: inline;
+		zoom: 1;
+	}
+</pre>
+
+		<p>Ключевым здесь является <code>.pic > .ie-prepend</code>. Это стили «иконки» для IE.</p>
+
+		<h2>Как инициализировать плагин?</h2>
+		<p>После подключения плагина на страничку, к прототипу jQuery будет добавлена функция <code>abFix</code> и применять метод нужно к экземляру jQuery.</p>
+		<p>Проще говоря:</p>
+<pre class="js-highlight" data-type="javascript">
+$('.ie7').abFix();
+</pre>
+
+		<p>Я существенно использую <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">метод опорных классов</a>. Это очень удобно. Впрочем, если вы подключаете стили для ИЕ другим способом — никаких проблем.</p> 
+		<p>Например:</p>
+
+		<pre class="js-highlight" data-type="html">
+&lt;!--[if lte IE 7]&gt
+&lt;script type="text/javascript"&gt;
+	$(function() {
+		$('body').adFix();
+	})
+&lt;/script&gt;
+&lt;![endif]--&gt;
+</pre>
+		<p class="callout">Уверен, что вы не используете глобальные стили для <code>i</code>, иначе может случится коллапс.</p>
+		<p class="callout-after">Плагин найден и положит в каждый элемент с классами <code>after-fix</code> и <code>before-fix</code> элементы <code>i.ie-append</code> и <code>i.ie-prepend</code> <i>после и до</i> имеющегося сожержимого соответсвенно. Приведенные имена классов используются по умолчанию.</p>
+		<div class="cl"></div>
+		<p>Вы можете переопределить их, «скормив» плагину свои настройки.</p>
+		<p>Например:</p>
+		<pre class="js-highlight" data-type="javascript">
+$('.ie7').abFix({
+  	beforeSelector : 'ie-before',
+  	afterSelector  : 'ie-after',
+  	beforeClass    : 'ico-prepend',
+  	afterClass     : 'ico-append'	
+});
+</pre>
+		<h2>Что еще?</h2>
+		<p>Очень часто разметка грузится асинхронно, в таком случае надо не забыть обратиться к плагину еще раз по её прибытии.</p>
+		<p>Например:</p>
+		<pre class="js-highlight" data-type="javascript">
+$.ajax({
+	url: 'path/to/file.php',
+	success: function( data ){
+		$('#ajax-container').append( data );
+		$('.ie7 #ajax-container').abFix();
+	}
+})
+</pre>
+		<p>Еще вы можете <strike>содрать</strike> посмотреть код на гитхабе и <a href="mailto:viktor.s.karpov@gmail.com" class="email-ico before-fix">написать мне письмо</a>.</p>
+		<p>Всё.</p>
+	</div>
+
+	<a href="https://github.com/you"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub"></a>
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+	<script type="text/javascript" src="js/highlight.jquery.js"></script>
+	<script type="text/javascript" src="js/jquery.abFix.js"></script>
+	<script type="text/javascript" src="js/all.js"></script>
+</body>
+</html>
