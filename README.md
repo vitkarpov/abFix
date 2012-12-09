@@ -30,7 +30,7 @@ How it wotks
 
 - That's it.
 
-You can redifine classes' names passes you options.
+You can redifine classes' names passes your options.
 
 Default options: 
 
