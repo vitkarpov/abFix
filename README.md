@@ -5,7 +5,7 @@ This tiny plugin emulates :after and :before for IE.
 
 About
 -----
-I am sure that every developer from one project to make the same hack - emulation :before and :after for IE. Generated content is very convenient and, personally, I don't wanna put empty DOM-elements manually in markup.
+I am sure that every developer from one project to another makes the same hack - emulation :before and :after for IE. Generated content is very convenient and, personally, I don't wanna put empty DOM-elements manually in markup.
 
 Probably, it is the smallest plugin in the world and very helpful.
 
