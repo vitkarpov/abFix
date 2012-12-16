@@ -22,7 +22,7 @@ Initialize plugin only for lte IE7 like this:
 
 	$('.ie7').abFix();
 
-How it wotks
+How it works
 ------------	
 - Plugin finds all elements with .after-fix and .before-fix classes inside elements you've picked with jQuery and applies abFix method. Usually it's one element — body, i.e. all document.
 
