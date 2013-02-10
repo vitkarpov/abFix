@@ -54,26 +54,26 @@
 		<p>Ключевым здесь является <code>.pic > .ie-prepend</code>. Это стили «иконки» для IE.</p>
 
 		<h2>Как инициализировать плагин?</h2>
-		<p>После подключения плагина на страничку, к прототипу jQuery будет добавлена функция <code>abFix</code> и применять метод нужно к экземляру jQuery.</p>
-		<p>Проще говоря:</p>
+		<p>После подключения плагина на страничку будет доступен метод <code>$.abFix</code></p>
+		<p>Выбрать jQuery нужно контейнер, внутри которого иконки должны появиться. Обычно это — <code>body</code>, т.е. весь документ:</p>
 <pre class="js-highlight" data-type="javascript">
 $('.ie7').abFix();
 </pre>
 
-		<p>Я существенно использую <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">метод опорных классов</a>. Это очень удобно. Впрочем, если вы подключаете стили для ИЕ другим способом — никаких проблем.</p> 
+		<p>Я существенно использую <a href="http://paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/">метод опорных классов</a>. Это удобно. Впрочем, если вы подключаете стили для ИЕ другим способом — никаких проблем.</p> 
 		<p>Например:</p>
 
 		<pre class="js-highlight" data-type="html">
 &lt;!--[if lte IE 7]&gt
 &lt;script type="text/javascript"&gt;
 	$(function() {
-		$('body').adFix();
+		$('body').abFix();
 	})
 &lt;/script&gt;
 &lt;![endif]--&gt;
 </pre>
 		<p class="callout">Уверен, что вы не используете глобальные стили для <code>i</code>, иначе может случится коллапс.</p>
-		<p class="callout-after">Плагин найден и положит в каждый элемент с классами <code>after-fix</code> и <code>before-fix</code> элементы <code>i.ie-append</code> и <code>i.ie-prepend</code> <i>после и до</i> имеющегося сожержимого соответсвенно. Приведенные имена классов используются по умолчанию.</p>
+		<p class="callout-after">Плагин найден и положит в каждый элемент с классами <code>after-fix</code> и <code>before-fix</code> элементы <code>i.ie-append</code> и <code>i.ie-prepend</code> <i>перед и после</i> имеющимся содержимым соответственно. Приведенные имена классов используются по умолчанию.</p>
 		<div class="cl"></div>
 		<p>Вы можете переопределить их, «скормив» плагину свои настройки.</p>
 		<p>Например:</p>
@@ -97,7 +97,7 @@ $.ajax({
 	}
 })
 </pre>
-		<p>Еще вы можете <strike>содрать</strike> посмотреть код на гитхабе и <a href="mailto:viktor.s.karpov@gmail.com" class="email-ico before-fix">написать мне письмо</a>.</p>
+		<p>Еще вы можете <strike>содрать</strike> посмотреть код на гитхабе и <a href="mailto:viktor.s.karpov@gmail.com" class="email-ico before-fix">написать мне письмо</a>, если заметили ошибку.</p>
 		<p>Всё.</p>
 	</div>
 
@@ -107,5 +107,8 @@ $.ajax({
 	<script type="text/javascript" src="js/highlight.jquery.js"></script>
 	<script type="text/javascript" src="jquery.abFix.js"></script>
 	<script type="text/javascript" src="js/all.js"></script>
+
+	<!-- Yandex.Metrika counter --><script type="text/javascript">(function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter19999006 = new Ya.Metrika({id:19999006, webvisor:true, clickmap:true, accurateTrackBounce:true}); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = (d.location.protocol == "https:" ? "https:" : "http:") + "//mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks");</script><noscript><div><img src="//mc.yandex.ru/watch/19999006" style="position:absolute; left:-9999px;" alt="" /></div></noscript><!-- /Yandex.Metrika counter -->
+
 </body>
 </html>
